@@ -1,0 +1,79 @@
+.CurrentChat {
+  height: 100%;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .CurrentChat > .top {
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    height: 5em;
+    padding: .8em 1em;
+    border-bottom: 1px solid var(--border-primary); }
+    .CurrentChat > .top .companion {
+      display: flex;
+      align-items: center; }
+      .CurrentChat > .top .companion .back_to_chats {
+        margin-right: .8em;
+        width: 2.8em;
+        height: 2.8em;
+        border-radius: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center; }
+        @media (min-width: 769px) {
+          .CurrentChat > .top .companion .back_to_chats {
+            display: none; } }
+        .CurrentChat > .top .companion .back_to_chats svg {
+          stroke: var(--text-primary); }
+        .CurrentChat > .top .companion .back_to_chats:hover svg {
+          stroke: var(--accent); }
+      .CurrentChat > .top .companion .ProfileImage .profile_picture {
+        cursor: pointer; }
+      .CurrentChat > .top .companion .ProfileImage:hover .profile_picture {
+        fill: var(--profile-default-d); }
+      .CurrentChat > .top .companion .profile_name {
+        margin-left: .5em;
+        font-weight: 500; }
+    .CurrentChat > .top .no_companion {
+      padding: 2em; }
+  .CurrentChat .chat_body {
+    max-height: calc( 100% - 11em);
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 1em .5em; }
+  .CurrentChat .no_messages, .CurrentChat .no_chat_selected {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em; }
+  .CurrentChat .chat_message {
+    height: 6em;
+    border-top: 1px solid var(--border-primary);
+    padding: 1.5em;
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    transition: all .3s ease; }
+    .CurrentChat .chat_message.disabled {
+      opacity: .4;
+      pointer-events: none; }
+    .CurrentChat .chat_message input {
+      border-radius: 1.25em; }
+    .CurrentChat .chat_message .floating {
+      right: 0;
+      transform: translate(-1em, -50%); }
+    .CurrentChat .chat_message button {
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3em;
+      height: 3em;
+      padding: .5em; }
+      .CurrentChat .chat_message button:hover svg {
+        opacity: 1;
+        fill: var(--accent); }
+      .CurrentChat .chat_message button svg {
+        transition: all .25s ease; }

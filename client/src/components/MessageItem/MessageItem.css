@@ -1,0 +1,36 @@
+.MessageItem.message {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  grid-template-rows: auto auto;
+  gap: .5em;
+  padding: 0 2em 0 0;
+  align-items: flex-start; }
+  .MessageItem.message:not(:first-child) {
+    margin-top: 1em; }
+  .MessageItem.message .ProfileImage {
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-start; }
+  .MessageItem.message .text_wrapper {
+    display: inline-flex;
+    align-items: center; }
+  .MessageItem.message .text {
+    padding: .8em 1em;
+    background-color: var(--msg-bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 2em; }
+  .MessageItem.message .time {
+    grid-column: 2;
+    font-size: .8em;
+    padding: .3em 0 0 1.3em; }
+  .MessageItem.message.mine {
+    padding: 0 0 0 2em;
+    text-align: right; }
+    .MessageItem.message.mine .text_wrapper {
+      grid-column: span 2;
+      justify-content: flex-end; }
+    .MessageItem.message.mine .text {
+      background-color: var(--msg-bg-primary);
+      color: var(--text-primary); }
+    .MessageItem.message.mine .time {
+      padding: .3em .5em 0 0; }

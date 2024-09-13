@@ -1,0 +1,16 @@
+.SearchInChats {
+  margin-top: 1.5em; }
+  .SearchInChats .input_wrapper {
+    font-size: .5em; }
+    .SearchInChats .input_wrapper input {
+      padding-left: 2.5em; }
+      .SearchInChats .input_wrapper input[type=text] {
+        font-size: 1.75em;
+        padding-left: 2.5em; }
+    .SearchInChats .input_wrapper .floating {
+      width: 1.75em;
+      height: 1.75em;
+      left: 0;
+      margin-left: 1em;
+      transform: translate(1em, -50%); }
+

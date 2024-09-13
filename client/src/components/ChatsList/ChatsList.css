@@ -1,0 +1,17 @@
+.ChatsList {
+  padding: 2em 0 1em;
+  display: flex;
+  flex-direction: column; }
+  .ChatsList .title_chats {
+    padding: 0 .5em;
+    color: var(--accent);
+    font-weight: 400; }
+  .ChatsList .chats {
+    margin-top: 2em;
+    flex-grow: 1; }
+  .ChatsList .no_chats {
+    padding: 3em 1em;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; }

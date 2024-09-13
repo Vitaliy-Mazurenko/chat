@@ -1,15 +1,16 @@
 {
-  "name": "backend",
+  "name": "chat-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node ./index.js",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "build": "npm install"
   },
   "keywords": [],
-  "author": "Liubov Parfonova <lubaparfyonova@gmail.com>",
+  "author": "Vitaliy",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
