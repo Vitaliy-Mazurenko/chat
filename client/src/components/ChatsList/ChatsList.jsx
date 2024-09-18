@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 const ChatsList = ({chats, changeCurrentChat}) => {
 
-  const chats_list = chats.length ? (
+  const chats_list = (!!chats || chats?.length > 0) ? (
     <ul className='chats_list'>
-      {chats.map(chat => {
+      {chats.map((chat) => {
         return <ChatItem
-          key={chat.chat_id}
+          key={chat._id}
           chat={chat}
-          handle_chat_click={() => changeCurrentChat(chat.chat_id)}
+          handle_chat_click={() => changeCurrentChat(chat._id)}
         />
       })}
     </ul>
@@ -29,6 +29,6 @@ const ChatsList = ({chats, changeCurrentChat}) => {
 export default ChatsList;
 
 ChatsList.propTypes = {
-  chats: PropTypes.array.isRequired,
+  chats: PropTypes.array,
   changeCurrentChat: PropTypes.func.isRequired,
 };

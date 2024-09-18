@@ -4,66 +4,13 @@ import ProfileImage from './components/ProfileImage';
 import SearchInChats from './components/SearchInChats';
 import ChatsList from './components/ChatsList';
 import CurrentChat from './components/CurrentChat';
+import { useHttp } from "./hooks/useHttp";
+import { fetchChats } from "./api/chatApi";
 
 const App = () => {
   const [currentChatId, setCurrentChatId] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState(null);
-  const [chats, setChats] = React.useState([
-    {
-      chat_id: 0,
-      companion: { profile_id: 1, profile_name: 'Alice Freeman' },
-      messages: [
-        {
-          message_owner: 1,
-          message_text: 'You are the worst!',
-          message_date: new Date('2024-06-12')
-        }
-      ]
-    },
-    {
-      chat_id: 1,
-      companion: { profile_id: 2, profile_name: 'Josefina Wilson' },
-      messages: [
-        {
-          message_owner: 2,
-          message_text: 'Quickly come to the meeting room 1B, we have a big server issue',
-          message_date: new Date('2024-04-21T04:08:00')
-        },
-        {
-          message_owner: 0,
-          message_text: 'I\'m having breakfast right now, can\'t you wait for 10 minutes?',
-          message_date: new Date('2024-04-22T04:05:00')
-        },
-        {
-          message_owner: 2,
-          message_text: 'We are losing money! Quick!',
-          message_date: new Date('2024-04-22T04:10:00')
-        }
-      ]
-    },
-    {
-      chat_id: 2,
-      companion: { profile_id: 3, profile_name: 'Velazquez Jones' },
-      messages: [
-        {
-          message_owner: 3,
-          message_text: 'Quickly come to the meeting room 1B, we have a big server issue.',
-          message_date: new Date('2024-03-18')
-        }
-      ]
-    },
-    {
-      chat_id: 3,
-      companion: { profile_id: 4, profile_name: 'Piter Fisher' },
-      messages: [
-        {
-          message_owner: 4,
-          message_text: 'Are there any bananas left in the dining room?',
-          message_date: new Date('2024-02-18')
-        }
-      ]
-    },
-  ]);
+  const [chats, setChats] = useHttp(fetchChats, null);
 
   const changeCurrentChat = chatId => {
     setCurrentChatId(chatId);
@@ -73,21 +20,42 @@ const App = () => {
     setCurrentChatId(null);
   };
 
+  const fetchData = React.useCallback(async () => {
+    try {
+      let response = await fetchChats();
+      console.log(response);
+      setChats(response);
+    } catch (error) {
+      console.error('No chats found.', error);
+    }
+  }, [setChats]);
+
   const getCurrentChat = () => {
-    return chats.find(chat => chat.chat_id === currentChatId);
+    if (!chats || !chats.length) {  
+      fetchData();
+      console.warn('No chats found.');
+      return null;
+    }
+
+    const currentChat = chats.find(chat => chat._id === currentChatId);
+
+    return currentChat;
   };
 
   const sortByDateFunc = (chat_1, chat_2) => {
-    const date_1 = new Date(chat_1.messages[chat_1.messages.length - 1].message_date);
-    const date_2 = new Date(chat_2.messages[chat_2.messages.length - 1].message_date);
+    if (!chat_1.messages.length) {
+      console.log('One of the chats is missing messages.');
+      return;
+    }
+    const date_1 = new Date(chat_1.messages[chat_1.messages.length - 1].createdAt);
+    const date_2 = new Date(chat_2.messages[chat_2.messages.length - 1].createdAt);
     return date_1.getTime() < date_2.getTime();
   };
 
-  console.log(chats);
 
   const addMessage = (message_data, to_chat_id) => {
     const newChats = [...chats];
-    const chatIndex = newChats.findIndex(chat => chat.chat_id === to_chat_id);
+    const chatIndex = newChats.findIndex(chat => chat._id === to_chat_id);
 
     if (chatIndex === -1) {
       return;
@@ -95,7 +63,6 @@ const App = () => {
 
     newChats[chatIndex].messages.push(message_data);
     newChats.sort(sortByDateFunc);
-
     setChats(newChats);
   };
 
@@ -105,10 +72,20 @@ const App = () => {
 
   const getFilteredChats = chats => {
     const searchedChats = searchQuery ? (
-      chats.filter(chat => chat.companion.profile_name.toLowerCase().includes(searchQuery.toLowerCase()))
+      chats.filter(chat => (`${chat.firstName} ${chat.lastName}`).toLowerCase().includes(searchQuery.toLowerCase()))
     ) : chats;
     return searchedChats;
   };
+
+
+  React.useEffect(() => {
+		if (!chats || !chats.length) {
+      fetchData();
+    } 
+      setChats(chats);    
+		},
+		[chats, setChats, fetchData],
+	);
 
   return (
     <div className={`App ${currentChatId === null ? '' : 'showing_chat'}`}>

@@ -7,25 +7,24 @@ import PropTypes from 'prop-types';
 
 const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
 
-  const companion = chat ? chat.companion : null;
   const messages = chat ? chat.messages : null;
 
   const messages_html = messages ? (
     messages.length ? (
       <ul className='messages'>
-        {messages.map((message, index) => <MessageItem key={index} message={message} is_mine={message.message_owner === 0} />)}
+        {messages.map((message, index) => <MessageItem key={index} message={message} is_mine={message.author === '0'} />)}
       </ul>
     ) : (<div className='no_messages'>There are no messages in this chat.</div>)
   ) : (<div className='no_chat_selected'>No chat selected.</div>);
 
-  const companion_html = companion ? (
+  const companion_html = chat ? (
     <div className='companion'>
       <button className='back_to_chats' onClick={hideCurrentChat}>
         <ArrowLeft width={24} height={24} />
       </button>
-      <ProfileImage profile_id={companion.profile_id} />
+      <ProfileImage profile_id={chat._id} />
       <h3 className='profile_name'>
-        {companion.profile_name}
+        {`${chat.firstName} ${chat.lastName}`}
       </h3>
     </div>
   ) : (<div className='no_companion'></div>);
@@ -39,13 +38,13 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
       date.setSeconds(date.getSeconds());
 
       const message_data = {
-        message_owner: companion.profile_id,
-        message_text: data[0].content,
-        message_date: date
+        author: chat._id,
+        text: data[0].content,
+        createdAt: date
       };
 
       setTimeout(() => {
-        addMessage(message_data, chat.chat_id);
+        addMessage(message_data, chat._id);
       }, 10);
 
     } catch (err) {
@@ -60,13 +59,13 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
 
     const date = new Date();
     const message_data = {
-      message_owner: 0,
-      message_text: message_text,
-      message_date: date
+      author: '0',
+      text: message_text,
+      createdAt: date
     };
     e.target.querySelector("[name=message]").value = '';
 
-    addMessage(message_data, chat.chat_id);
+    addMessage(message_data, chat._id);
 
     get_response();
   }
@@ -77,7 +76,7 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
       <div className='chat_body'>{messages_html}</div>
       <div className={`chat_message ${chat ? '' : 'disabled'}`}>
         <form className='input_wrapper chat_message_wrapper' onSubmit={on_message_submit}>
-          <input type='text' name='message' placeholder='Type your message' />
+          <input type='text' name='message' placeholder='Type your message' required/>
           <button className='floating'>
             <Send className='send' />
           </button>
@@ -92,8 +91,9 @@ export default CurrentChat;
 
 CurrentChat.propTypes = {
   chat: PropTypes.shape({
-    chat_id: PropTypes.number.isRequired,
-    companion: PropTypes.object,
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
     messages: PropTypes.array,
   }),
   addMessage: PropTypes.func.isRequired,

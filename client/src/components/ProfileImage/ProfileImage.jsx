@@ -10,12 +10,18 @@ const ProfileImage = ({profile_id, profile_image_url}) => {
       className='profile_picture'
       src={`./images/profile_${profile_id}.png`}
       alt='profile avatar'
+      onError={(e) => {
+        e.target.src = './images/profile_0.png';
+      }}
     />
   ) : profile_image_url ? (
     <img
       className='profile_picture'
       src={profile_image_url}
       alt='profile avatar'
+      onError={(e) => {
+        e.target.src = './images/profile_0.png';
+      }}
     />
   ) : <ProfileImageDefault className='profile_picture' />;
 
@@ -32,6 +38,6 @@ const ProfileImage = ({profile_id, profile_image_url}) => {
 export default ProfileImage;
 
 ProfileImage.propTypes = {
-  profile_id: PropTypes.number.isRequired,
+  profile_id: PropTypes.string.isRequired,
   profile_image_url: PropTypes.string,
 };

@@ -4,7 +4,7 @@ import { date_to_format } from '../../helpers/helper_functions.js';
 import PropTypes from 'prop-types';
 
 const MessageItem = ({message, is_mine}) => {
-	const profile_image = is_mine ? null : <ProfileImage profile_id={message.message_owner} />;
+	const profile_image = is_mine ? null : <ProfileImage profile_id={message.author} />;
 
 	return (
 		<li className={`MessageItem message ${is_mine ? 'mine' : ''}`}>
@@ -12,11 +12,11 @@ const MessageItem = ({message, is_mine}) => {
 
 			<div className='text_wrapper'>
 				<p className='text'>
-					{message.message_text}
+					{message.text}
 				</p>
 			</div>
-			<time className='time' dateTime={message.message_date}>
-				{date_to_format(message.message_date, 'date_short_time_full')}
+			<time className='time' dateTime={message.createdAt}>
+				{date_to_format(message.createdAt, 'date_short_time_full')}
 			</time>
 		</li>
 	);
