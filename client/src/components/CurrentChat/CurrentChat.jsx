@@ -12,7 +12,7 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
   const messages_html = messages ? (
     messages.length ? (
       <ul className='messages'>
-        {messages.map((message, index) => <MessageItem key={index} message={message} is_mine={message.author === '0'} />)}
+        {messages.map((message, index) => <MessageItem key={index} message={message} is_mine={message.isMine} />)}
       </ul>
     ) : (<div className='no_messages'>There are no messages in this chat.</div>)
   ) : (<div className='no_chat_selected'>No chat selected.</div>);
@@ -33,19 +33,18 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
     try {
       const response = await fetch('https://johndturn-quotableapiproxy.web.val.run?tags=Inspirational');
       const data = await response.json();
-
       const date = new Date();
       date.setSeconds(date.getSeconds());
 
-      const message_data = {
+      const message = {
         author: chat._id,
         text: data[0].content,
         createdAt: date
       };
 
       setTimeout(() => {
-        addMessage(message_data, chat._id);
-      }, 10);
+        addMessage(message.text, chat._id, false);
+      }, 0);
 
     } catch (err) {
       console.log(err.message);
@@ -58,14 +57,14 @@ const CurrentChat = ({chat, addMessage, hideCurrentChat}) => {
     const message_text = form_data.get('message');
 
     const date = new Date();
-    const message_data = {
+    const message = {
       author: '0',
       text: message_text,
       createdAt: date
     };
     e.target.querySelector("[name=message]").value = '';
 
-    addMessage(message_data, chat._id);
+    addMessage(message.text, chat._id, true);
 
     get_response();
   }

@@ -9,7 +9,6 @@ const MessageItem = ({message, is_mine}) => {
 	return (
 		<li className={`MessageItem message ${is_mine ? 'mine' : ''}`}>
 			{profile_image}
-
 			<div className='text_wrapper'>
 				<p className='text'>
 					{message.text}
@@ -26,5 +25,5 @@ export default MessageItem;
 
 MessageItem.propTypes = {
 	message: PropTypes.object.isRequired,
-	is_mine: PropTypes.bool.isRequired,
+	is_mine: PropTypes.bool,
   };

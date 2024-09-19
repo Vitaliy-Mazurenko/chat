@@ -6,7 +6,7 @@ const ChatsList = ({chats, changeCurrentChat}) => {
 
   const chats_list = (!!chats || chats?.length > 0) ? (
     <ul className='chats_list'>
-      {chats.map((chat) => {
+      {chats.map(chat => {
         return <ChatItem
           key={chat._id}
           chat={chat}

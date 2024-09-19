@@ -5,7 +5,7 @@ import SearchInChats from './components/SearchInChats';
 import ChatsList from './components/ChatsList';
 import CurrentChat from './components/CurrentChat';
 import { useHttp } from "./hooks/useHttp";
-import { fetchChats } from "./api/chatApi";
+import { fetchChats, getOneChat, sendMessage } from "./api/chatApi";
 
 const App = () => {
   const [currentChatId, setCurrentChatId] = React.useState(null);
@@ -23,7 +23,6 @@ const App = () => {
   const fetchData = React.useCallback(async () => {
     try {
       let response = await fetchChats();
-      console.log(response);
       setChats(response);
     } catch (error) {
       console.error('No chats found.', error);
@@ -33,7 +32,7 @@ const App = () => {
   const getCurrentChat = () => {
     if (!chats || !chats.length) {  
       fetchData();
-      console.warn('No chats found.');
+      console.log('No chats found.');
       return null;
     }
 
@@ -53,17 +52,24 @@ const App = () => {
   };
 
 
-  const addMessage = (message_data, to_chat_id) => {
-    const newChats = [...chats];
-    const chatIndex = newChats.findIndex(chat => chat._id === to_chat_id);
+  const addMessage = async (message, chatId, isMine) => {
 
-    if (chatIndex === -1) {
-      return;
-    }
+      try {
+        const newChats = [...chats];
+        const chatIndex = newChats.findIndex(chat => chat._id === chatId);
+        if (chatIndex === -1) {
+          return;
+        }
+        await sendMessage({ chatId, message, isMine });
+        let newMessage = await getOneChat(chatId);
+        newChats[chatIndex].messages = newMessage.messages;
+        newChats.sort(sortByDateFunc);
 
-    newChats[chatIndex].messages.push(message_data);
-    newChats.sort(sortByDateFunc);
-    setChats(newChats);
+        setChats(newChats);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+
   };
 
   const changeSearchQuery = searchQuery => {
@@ -77,12 +83,11 @@ const App = () => {
     return searchedChats;
   };
 
-
   React.useEffect(() => {
 		if (!chats || !chats.length) {
       fetchData();
     } 
-      setChats(chats);    
+      setChats(chats);
 		},
 		[chats, setChats, fetchData],
 	);
