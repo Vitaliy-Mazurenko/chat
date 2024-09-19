@@ -21,12 +21,12 @@ export const removeChat = async id => {
 };
 export const getQuote = async () => {
   try {
-    const response = await fetch("https://api.quotable.io/random");
+    const response = await fetch("https://johndturn-quotableapiproxy.web.val.run?tags=Inspirational");
     if (!response.ok) {
       throw new Error("Failed to fetch quote");
     }
     const quoteData = await response.json();
-    const data = { id: quoteData._id, quote: quoteData.content };
+    const data = { id: quoteData._id, quote: quoteData.content, isMine: true };
     return data;
   } catch (err) {
     console.error("Error fetching quote:", err);

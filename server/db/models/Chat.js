@@ -14,6 +14,10 @@ const messageSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  isMine: {
+    type: Boolean,
+    default: false
+  },
 });
 const chatSchema = new Schema(
   {

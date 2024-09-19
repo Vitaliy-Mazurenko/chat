@@ -68,13 +68,13 @@ const deleteChat = async (req, res) => {
     throw HttpError(404, `Chat with id ${id} not found`);
   }
   res.status(200).json({
-    ststus: 200,
+    status: 200,
     message: "Chat removed successfully",
   });
 };
 
 const sendMessage = async (req, res) => {
-  const { text, author } = req.body;
+  const { text, author, isMine } = req.body;
   const { chatId: id } = req.params;
 
   if (!text) {
@@ -85,7 +85,7 @@ const sendMessage = async (req, res) => {
   if (!chat) {
     throw HttpError(404, "Chat not found");
   }
-  const message = { text, author };
+  const message = { text, author, isMine };
 
   chat.messages.push(message);
 
