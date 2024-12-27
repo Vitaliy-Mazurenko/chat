@@ -1,0 +1,19 @@
+.myInput {
+  width: 200px;
+  padding: 0 1px;
+  margin: 4px 5px 0 0;
+  height: 30px;
+  font-family: 'Roboto', sans-serif;
+  background: none;
+  border: 2px solid #D3D2DA;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: 0;
+  border-color: lightgrey;
+}
+
+.myInput::placeholder {
+  padding-left: 7px;
+}

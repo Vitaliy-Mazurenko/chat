@@ -6,7 +6,7 @@ import errorHandler from "./middlewares/errorHandler.js";
 import chatRouter from "./routes/chatRoutes.js";
 
 const startServer = () => {
-  const port = Number(env("PORT", 5000));
+  const port = Number(env("PORT", 4000));
   const app = express();
   app.use(cors());
   app.use(express.json());

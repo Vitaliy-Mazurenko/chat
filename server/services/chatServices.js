@@ -19,20 +19,7 @@ export const updateChat = async ({ _id, data }) => {
 export const removeChat = async id => {
   return Chat.findOneAndDelete(id);
 };
-export const getQuote = async () => {
-  try {
-    const response = await fetch("https://johndturn-quotableapiproxy.web.val.run?tags=Inspirational");
-    if (!response.ok) {
-      throw new Error("Failed to fetch quote");
-    }
-    const quoteData = await response.json();
-    const data = { id: quoteData._id, quote: quoteData.content, isMine: true };
-    return data;
-  } catch (err) {
-    console.error("Error fetching quote:", err);
-    throw err;
-  }
-};
+
 export const saveChat = async chat => {
   try {
     await chat.save();

@@ -65,4 +65,4 @@ This is a chat application built with React and Vite for the frontend, and Expre
 ### Usage
 
 - Open your browser and navigate to `http://localhost:5173/` to see the application.
-- The backend server will run on `http://localhost:5000`.
+- The backend server will run on `http://localhost:4000`.

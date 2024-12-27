@@ -1,0 +1,22 @@
+button {
+  margin: 5px;
+  background-color: white;
+  border: 2px dashed #D3D2DA;
+  border-radius: 8px;
+  padding: 8px 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 200px;
+}
+
+button > span{
+  font-size: 22px;
+  bottom: -2px;
+  margin-right: 10px;
+  position: relative;
+}
+
+button:focus{
+box-shadow: 0 0 0 2px rgb(13 110 253 / 10%);
+border-radius: 2px;
+}

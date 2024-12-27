@@ -5,7 +5,8 @@ import SearchInChats from './components/SearchInChats';
 import ChatsList from './components/ChatsList';
 import CurrentChat from './components/CurrentChat';
 import { useHttp } from "./hooks/useHttp";
-import { fetchChats, getOneChat, sendMessage } from "./api/chatApi";
+import { createChat } from "./api/chatApi";
+import { fetchChats, getOneChat, sendMessage, deleteChat } from "./api/chatApi";
 
 const App = () => {
   const [currentChatId, setCurrentChatId] = React.useState(null);
@@ -83,6 +84,25 @@ const App = () => {
     return searchedChats;
   };
 
+    const handleCreateChat = async newChatData => {
+      try {
+        const newChat = await createChat(newChatData);
+        setChats([...chats, newChat]);
+      } catch (error) {
+        console.error("Error creating chat:", error);
+      }
+    };
+
+    const handleDelete = async chatId => {
+      try {
+        await deleteChat(chatId);
+        const newChats = chats.filter(chat => chat._id !== chatId);
+        setChats(newChats);
+      } catch (error) {
+        console.error("Error deleting chat:", error);
+      }
+    };
+
   React.useEffect(() => {
 		if (!chats || !chats.length) {
       fetchData();
@@ -105,6 +125,8 @@ const App = () => {
         <ChatsList
           chats={getFilteredChats(chats)}
           changeCurrentChat={changeCurrentChat}
+          handleCreateChat={handleCreateChat}
+          handleDelete={handleDelete}
         />
       </div>
 

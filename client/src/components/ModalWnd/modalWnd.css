@@ -1,0 +1,95 @@
+.ModalWnd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 11;
+}
+
+.Modal-wrap {
+  max-width: 700px;
+  width: 35%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+
+.ModalWnd i {
+  position: fixed;
+  right: 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+.ModalWnd h5 {
+  color: white;
+  font-size: 28px;
+  margin: 1px 15px;
+}
+
+.Modal-header {
+  width: 100%;
+  height: 40px;
+  display: inline-flex;
+  background-color: #5A647D;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+}
+
+.Modal-content{
+  display: flex;
+}
+
+.Modal-edit-content {
+  width: 70%;
+  padding: 0 15px 20px;
+}
+
+.Modal-header-content {
+  padding: 0px 15px 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Edit-task {
+  width: 110px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #D3D2DA;
+  border-radius: 3px;
+  margin-top: 15px;
+}
+
+.Edit-task img {
+  width: 14px;
+  height: 14px;
+  transform: rotate(-90deg);
+  margin-top: 7px;
+  margin-right: 8px;
+}
+
+.Modal-task-name {
+  padding: 0 0;
+}
+
+.Modal-form {
+  padding-top: 15px;
+  line-height: 30px;
+}
+
+.Modal-form input{
+  padding-left: 5px;
+  margin-left: 7px;
+}
+
+#btn{
+  border: 2px dashed grey;
+}
+
