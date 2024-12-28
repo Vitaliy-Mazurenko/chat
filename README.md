@@ -66,3 +66,5 @@ This is a chat application built with React and Vite for the frontend, and Expre
 
 - Open your browser and navigate to `http://localhost:5173/` to see the application.
 - The backend server will run on `http://localhost:4000`.
+
+### [Link to the program page](https://chat.victory.vinnica.ua/).
