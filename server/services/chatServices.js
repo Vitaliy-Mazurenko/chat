@@ -17,7 +17,7 @@ export const updateChat = async ({ _id, data }) => {
   return Chat.findOneAndUpdate({ _id }, data, { new: true });
 };
 export const removeChat = async id => {
-  return Chat.findOneAndDelete(id);
+  return Chat.findByIdAndDelete(id);
 };
 
 export const saveChat = async chat => {

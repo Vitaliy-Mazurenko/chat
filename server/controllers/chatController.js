@@ -62,7 +62,7 @@ const updateChat = async (req, res) => {
 };
 
 const deleteChat = async (req, res) => {
-  const { id } = req.params;
+  const { chatId: id } = req.params;
   const removedChat = await chatServices.removeChat(id);
   if (!removedChat) {
     throw HttpError(404, `Chat with id ${id} not found`);
@@ -92,16 +92,6 @@ const sendMessage = async (req, res) => {
   await chatServices.saveChat(chat);
   res.status(201).json(message);
 
-  setTimeout(async () => {
-    try {
-      const { id, quote } = await chatServices.getQuote();
-      const autoResponse = { text: quote, author: id };
-      chat.messages.push(autoResponse);
-      await chatServices.saveChat(chat);
-    } catch (err) {
-      console.error("Failed to fetch quote from Quotable:", err);
-    }
-  }, 3000);
 };
 
 const searchChats = async (req, res) => {
