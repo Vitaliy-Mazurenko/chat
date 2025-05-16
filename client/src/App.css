@@ -1,27 +1,41 @@
 .App {
+  display: flex;
   height: 100vh;
-  overflow: hidden;
-  max-width: var(--width-desktop);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 450px 1fr;
-  grid-template-rows: 100%;
-  border-radius: .5em;
-  border: 1px solid var(--border-primary);
-  transition: all .3s ease; }
-  .App > .left {
-    border-right: 1px solid var(--border-primary);
-    display: flex;
-    flex-direction: column; }
-    .App > .left .top {
-      background-color: var(--bg-secondary);
-      padding: 1em; }
-    .App > .left .ChatsList {
-      flex-grow: 1; }
+  font-family: sans-serif;
+}
 
-@media (max-width: 768px) {
-  .App {
-    grid-template-columns: repeat(2, 100vw);
-    overflow: visible; }
-    .App.showing_chat {
-      transform: translateX(-100vw); } }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

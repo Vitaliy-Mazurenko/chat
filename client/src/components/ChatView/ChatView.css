@@ -1,0 +1,156 @@
+.chat-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+
+.chat-view__header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+}
+
+.chat-view__avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 15px;
+  background-color: #eee; /* Placeholder */
+}
+
+.chat-view__header-info {
+    flex-grow: 1;
+}
+
+.chat-view__name {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.chat-view__status {
+    font-size: 0.8em;
+    color: #777;
+    margin: 0;
+}
+
+.chat-view__messages-area {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #eeeeee; 
+  position: relative; 
+}
+
+.message-item {
+  display: flex;
+  margin-bottom: 10px;
+  max-width: 70%;
+}
+
+.message-item__bubble {
+  padding: 8px 12px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word; 
+}
+
+.message-item__text {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.message-item__timestamp {
+  font-size: 11px;
+  color: #333; 
+  display: block;
+  text-align: right;
+}
+
+
+.message-item.user {
+  margin-left: auto; 
+  flex-direction: row-reverse; 
+}
+
+.message-item.user .message-item__bubble {
+  background-color: #c9cac9; 
+  border-top-right-radius: 5px; 
+}
+
+
+.message-item.bot {
+  margin-right: auto; 
+}
+
+.message-item.bot .message-item__bubble {
+  background-color: #ffffff; 
+  border-top-left-radius: 5px; 
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.message-item.bot .message-item__timestamp {
+  color: #aaa;
+}
+
+
+.chat-view__input-area {
+  display: flex;
+  padding: 10px 15px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f0f0f0;
+}
+
+.chat-view__input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.chat-view__input:focus {
+    border-color: #1890ff;
+}
+
+.chat-view__send-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #1890ff; 
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.chat-view__send-button:hover {
+  background-color: #40a9ff;
+}
+
+.chat-view__status-overlay {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  color: #777;
+  background-color: rgba(229, 221, 213, 0.8); 
+  z-index: 10; 
+}
+
+.chat-view__status-overlay.error {
+  color: red;
+  font-weight: bold;
+} 

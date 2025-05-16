@@ -1,10 +1,10 @@
-This is a chat application built with React and Vite for the frontend, and Express.js with MongoDB Atlas for the backend. 
+This is a chat application built with React for the frontend, and Express.js with MongoDB Atlas for the backend. 
 
 **Objective**: Build a chat application with auto response from BE using random quote
 
 ## Main stack
 
-- **Frontend**: React, Vite, HTML, CSS
+- **Frontend**: React, HTML, CSS
 - **Backend**: Express.js, MongoDB (Atlas)
 
 ## Setup and Installation
@@ -31,14 +31,7 @@ This is a chat application built with React and Vite for the frontend, and Expre
    npm install
    ```
 
-3. **Create a `.env` file in the `server` directory and add your MongoDB URI**:
-
-   ```env
-   MONGO_URI=your_mongodb_uri
-   PORT=5000
-   ```
-
-4. **Start the backend server**:
+3. **Start the backend server**:
    ```bash
    npm start
    ```
@@ -59,12 +52,12 @@ This is a chat application built with React and Vite for the frontend, and Expre
 
 3. **Start the frontend development server**:
    ```bash
-   npm run dev
+   npm start
    ```
 
 ### Usage
 
-- Open your browser and navigate to `http://localhost:5173/` to see the application.
-- The backend server will run on `http://localhost:4000`.
+- Open your browser and navigate to `http://localhost:3000/` to see the application.
+- The backend server will run on `http://localhost:5000`.
 
-### [Link to the program page](https://chat.victory.vinnica.ua/).
+### [Link to the App page](https://chat.victory.vinnica.ua/).
